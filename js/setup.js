@@ -1,15 +1,82 @@
 'use strict';
 
-var userSetup = document.querySelector('.setup');
-userSetup.classList.remove('hidden');
-userSetup.querySelector('.setup-similar').classList.remove('hidden');
-
+var ENTER_KEYCODE = 13;
+var ESC_KEYCODE = 27;
 var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYE_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var SIMILAR_WIZARDS_COUNT = 4;
+var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 var wizards = [];
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+var setupUserName = setup.querySelector('.setup-user-name');
+var setupWizardEyes = setup.querySelector('.setup-wizard .wizard-eyes');
+var setupWizardFireball = setup.querySelector('.setup-fireball-wrap');
+var submitForm = setup.querySelector('.setup-wizard-form');
+
+submitForm.action = 'https://js.dump.academy/code-and-magick';
+setup.querySelector('.setup-similar').classList.remove('hidden');
+
+var onEscClose = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    onClickClose();
+  }
+};
+
+var onClickOpen = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onEscClose);
+};
+
+var onClickClose = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onEscClose);
+};
+
+var onClickChangeEyeColor = function () {
+  var eye = EYE_COLORS[(getRandom(0, EYE_COLORS.length - 1))];
+  setupWizardEyes.style.fill = eye;
+  document.querySelector('.setup-player input[name="eyes-color"]').value = eye;
+};
+
+var onClickChangeFireballColor = function () {
+  var fireball = FIREBALL_COLORS[(getRandom(0, FIREBALL_COLORS.length - 1))];
+  setupWizardFireball.style.backgroundColor = fireball;
+  document.querySelector('.setup-player input[name="fireball-color"]').value = fireball;
+};
+
+setupOpen.addEventListener('click', onClickOpen);
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    onClickOpen();
+  }
+});
+
+setupClose.addEventListener('click', onClickClose);
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    onEscClose();
+  }
+});
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    onClickClose();
+  }
+});
+
+setupUserName.addEventListener('focus', function () {
+  document.removeEventListener('keydown', onEscClose);
+});
+
+setupUserName.addEventListener('blur', function () {
+  document.addEventListener('keydown', onEscClose);
+});
+
+setupWizardEyes.addEventListener('click', onClickChangeEyeColor);
+setupWizardFireball.addEventListener('click', onClickChangeFireballColor);
 
 var getRandom = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -48,6 +115,8 @@ var buildFragments = function (wizard) {
   return fragment;
 };
 
-var similarListElement = userSetup.querySelector('.setup-similar-list');
+var similarListElement = setup.querySelector('.setup-similar-list');
 
 similarListElement.appendChild(buildFragments(wizards));
+
+console.log(setupUserName);
