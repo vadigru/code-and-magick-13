@@ -61,6 +61,7 @@ setupClose.addEventListener('keydown', function (evt) {
     onEscClose();
   }
 });
+
 setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     onClickClose();
@@ -118,5 +119,3 @@ var buildFragments = function (wizard) {
 var similarListElement = setup.querySelector('.setup-similar-list');
 
 similarListElement.appendChild(buildFragments(wizards));
-
-console.log(setupUserName);
