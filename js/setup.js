@@ -2,7 +2,6 @@
 
 (function () {
 
-
   // wizards rendering  ------------------------------------------------------
 
   var similarListElement = window.const.setupElement.querySelector('.setup-similar-list');
@@ -31,14 +30,13 @@
 
   var errorLoadHandler = function (errorMessage) {
     var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: white; color: red; line-height: 50px; padding: 25px; box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 0.8);';
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: white; color: red; line-height: 50px; padding: 25px; box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 0.8); cursor: pointer;';
     node.style.position = 'absolute';
     node.style.left = '30%';
     node.style.right = '30%';
     node.style.top = '15%';
     node.style.fontSize = '30px';
     node.classList.add('errorDialog');
-
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
 

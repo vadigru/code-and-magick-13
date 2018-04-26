@@ -7,9 +7,6 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = window.const.setupElement.querySelector('.setup-close');
   var setupUserName = window.const.setupElement.querySelector('.setup-user-name');
-  var submitForm = window.const.setupElement.querySelector('.setup-wizard-form');
-
-  submitForm.action = 'https://js.dump.academy/code-and-magick';
 
   window.const.setupElement.querySelector('.setup-similar').classList.remove('hidden');
 
@@ -63,7 +60,7 @@
 
   var errorSaveHandler = function () {
     var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: white; color: red; line-height: 50px; padding: 25px; box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 0.8);';
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: white; color: red; line-height: 50px; padding: 25px; box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 0.8); cursor: pointer;';
     node.style.position = 'absolute';
     node.style.left = '30%';
     node.style.right = '30%';
