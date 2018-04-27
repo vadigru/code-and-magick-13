@@ -1,10 +1,10 @@
 'use strict';
 
 (function () {
-  var saveURL = 'https://js.dump.academy/code-and-magick';
-  var loadURL = 'https://js.dump.academy/code-and-magick/data';
-  var serverTime = 20000;
-  var statusOk = 200;
+  var SAVE_URL = 'https://js.dump.academy/code-and-magick';
+  var LOAD_URL = 'https://js.dump.academy/code-and-magick/data';
+  var SERVER_TIME = 20000;
+  var STATUS_OK = 200;
 
   // success/error handling function ------------------------------------------
 
@@ -13,7 +13,7 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === statusOk) {
+      if (xhr.status === STATUS_OK) {
         onLoad(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -26,7 +26,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = serverTime;
+    xhr.timeout = SERVER_TIME;
 
     return xhr;
   };
@@ -35,7 +35,7 @@
 
   var load = function (onLoad, onError) {
     var xhr = setup(onLoad, onError);
-    xhr.open('GET', loadURL);
+    xhr.open('GET', LOAD_URL);
     xhr.send();
   };
 
@@ -43,7 +43,7 @@
 
   var save = function (data, onLoad, onError) {
     var xhr = setup(onLoad, onError);
-    xhr.open('POST', saveURL);
+    xhr.open('POST', SAVE_URL);
     xhr.send(data);
   };
 
