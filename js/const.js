@@ -24,7 +24,6 @@
       '#e6e848'
     ],
     SIMILAR_WIZARDS_COUNT: 4,
-    wizards: [],
     setupElement: document.querySelector('.setup')
   };
 })();

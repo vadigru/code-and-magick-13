@@ -54,11 +54,11 @@
 
   var form = window.const.setupElement.querySelector('.setup-wizard-form');
 
-  var successSaveHandler = function () {
+  var onSubmitSuccessHandle = function () {
     window.const.setupElement.classList.add('hidden');
   };
 
-  var errorSaveHandler = function () {
+  var onSubmitErrorHandle = function () {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: white; color: red; line-height: 50px; padding: 25px; box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 0.8); cursor: pointer;';
     node.style.position = 'absolute';
@@ -83,7 +83,7 @@
   };
 
   form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), successSaveHandler, errorSaveHandler);
+    window.backend.save(new FormData(form), onSubmitSuccessHandle, onSubmitErrorHandle);
     evt.preventDefault();
   });
 
